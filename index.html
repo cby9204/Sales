@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)file:///C:/Users/Choi%20Boyoung/Downloads/sales_playbook_3.html -->
+<html lang="ko" data-theme="light"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>영업활동 monday.com 가이드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="./index_files/css2" rel="stylesheet">
+<style>
+/* ===== 디자인 토큰 ===== */
+:root {
+  /* Light theme */
+  --bg: #fafaf9;
+  --bg-elevated: #ffffff;
+  --bg-subtle: #f5f5f4;
+  --bg-code: #f5f5f4;
+  --border: #e7e5e4;
+  --border-strong: #d6d3d1;
+  --text: #1c1917;
+  --text-muted: #57534e;
+  --text-subtle: #78716c;
+  --accent: #0a0a0a;
+  --accent-fg: #fafaf9;
+
+  --tag-lead-bg: #eff6ff;
+  --tag-lead-fg: #1e40af;
+  --tag-deal-bg: #fef3c7;
+  --tag-deal-fg: #854d0e;
+  --tag-closed-bg: #f3e8ff;
+  --tag-closed-fg: #6b21a8;
+  --tag-required-bg: #dbeafe;
+  --tag-required-fg: #1e3a8a;
+  --tag-optional-bg: #f5f5f4;
+  --tag-optional-fg: #57534e;
+  --tag-forecast-bg: #fed7aa;
+  --tag-forecast-fg: #9a3412;
+  --tag-warn-bg: #fee2e2;
+  --tag-warn-fg: #991b1b;
+  --tag-do-bg: #dcfce7;
+  --tag-do-fg: #166534;
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 14px;
+
+  --sidebar-width: 280px;
+  --content-max: 880px;
+}
+
+[data-theme="dark"] {
+  --bg: #0c0a09;
+  --bg-elevated: #1c1917;
+  --bg-subtle: #1c1917;
+  --bg-code: #1c1917;
+  --border: #292524;
+  --border-strong: #44403c;
+  --text: #fafaf9;
+  --text-muted: #a8a29e;
+  --text-subtle: #78716c;
+  --accent: #fafaf9;
+  --accent-fg: #0c0a09;
+
+  --tag-lead-bg: rgba(59, 130, 246, 0.15);
+  --tag-lead-fg: #93c5fd;
+  --tag-deal-bg: rgba(245, 158, 11, 0.15);
+  --tag-deal-fg: #fcd34d;
+  --tag-closed-bg: rgba(168, 85, 247, 0.15);
+  --tag-closed-fg: #d8b4fe;
+  --tag-required-bg: rgba(59, 130, 246, 0.18);
+  --tag-required-fg: #93c5fd;
+  --tag-optional-bg: rgba(120, 113, 108, 0.2);
+  --tag-optional-fg: #a8a29e;
+  --tag-forecast-bg: rgba(249, 115, 22, 0.18);
+  --tag-forecast-fg: #fdba74;
+  --tag-warn-bg: rgba(239, 68, 68, 0.18);
+  --tag-warn-fg: #fca5a5;
+  --tag-do-bg: rgba(34, 197, 94, 0.18);
+  --tag-do-fg: #86efac;
+}
+
+/* ===== Reset & Base ===== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+code, .mono {
+  font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+  font-size: 0.88em;
+}
+
+/* ===== Layout ===== */
+.app {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  min-height: 100vh;
+}
+
+/* ===== Sidebar ===== */
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  background: var(--bg-elevated);
+  border-right: 1px solid var(--border);
+  padding: 32px 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar::-webkit-scrollbar { width: 6px; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+.brand-icon {
+  width: 38px;
+  height: 38px;
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-radius: var(--radius-sm);
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 16px;
+}
+.brand-text { display: flex; flex-direction: column; }
+.brand-title { font-weight: 700; font-size: 14px; }
+.brand-subtitle { font-size: 11px; color: var(--text-subtle); margin-top: 2px; }
+
+.nav-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-subtle);
+  margin-bottom: 10px;
+  padding-left: 4px;
+}
+.nav { display: flex; flex-direction: column; gap: 2px; margin-bottom: 24px; }
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 500;
+  transition: all 0.15s;
+  cursor: pointer;
+}
+.nav-item:hover { background: var(--bg-subtle); color: var(--text); }
+.nav-item.active { background: var(--accent); color: var(--accent-fg); font-weight: 600; }
+.nav-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  min-width: 18px;
+  text-align: center;
+  color: var(--text-subtle);
+}
+.nav-item.active .nav-num { color: var(--accent-fg); opacity: 0.7; }
+
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.theme-toggle {
+  display: flex;
+  background: var(--bg-subtle);
+  padding: 3px;
+  border-radius: 8px;
+  gap: 2px;
+}
+.theme-btn {
+  background: transparent;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.theme-btn.active {
+  background: var(--bg-elevated);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+}
+.version-tag {
+  font-size: 11px;
+  color: var(--text-subtle);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ===== Main Content ===== */
+.main {
+  padding: 64px 56px 120px;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ===== Hero ===== */
+.hero {
+  margin-bottom: 80px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--border);
+}
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-subtle);
+  margin-bottom: 16px;
+  padding: 4px 10px;
+  background: var(--bg-subtle);
+  border-radius: 999px;
+}
+.hero-title {
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+}
+.hero-desc {
+  font-size: 17px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 680px;
+}
+
+/* ===== Section ===== */
+.section { margin-bottom: 80px; scroll-margin-top: 32px; }
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.section-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-subtle);
+  background: var(--bg-subtle);
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+.section-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.section-desc {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-top: -16px;
+  margin-bottom: 32px;
+  max-width: 720px;
+}
+
+/* ===== Sub-section ===== */
+.subsection { margin-bottom: 40px; scroll-margin-top: 32px; }
+.subsection-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.subsection-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-subtle);
+  font-weight: 500;
+}
+
+/* ===== Card ===== */
+.card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 16px;
+}
+.card-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+.card-desc { font-size: 14px; color: var(--text-muted); }
+
+/* ===== Callout ===== */
+.callout {
+  display: flex;
+  gap: 14px;
+  padding: 16px 18px;
+  background: var(--bg-subtle);
+  border-radius: var(--radius);
+  margin: 16px 0;
+  border-left: 3px solid var(--border-strong);
+}
+.callout-warn {
+  background: var(--tag-warn-bg);
+  border-left-color: var(--tag-warn-fg);
+}
+.callout-warn .callout-icon { color: var(--tag-warn-fg); }
+.callout-info {
+  background: var(--tag-lead-bg);
+  border-left-color: var(--tag-lead-fg);
+}
+.callout-info .callout-icon { color: var(--tag-lead-fg); }
+.callout-icon { font-size: 18px; flex-shrink: 0; line-height: 1.4; }
+.callout-body { font-size: 14px; line-height: 1.6; }
+.callout-body strong { font-weight: 600; }
+
+/* ===== Tag / Pill ===== */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+.tag-lead { background: var(--tag-lead-bg); color: var(--tag-lead-fg); }
+.tag-deal { background: var(--tag-deal-bg); color: var(--tag-deal-fg); }
+.tag-closed { background: var(--tag-closed-bg); color: var(--tag-closed-fg); }
+.tag-required { background: var(--tag-required-bg); color: var(--tag-required-fg); }
+.tag-optional { background: var(--tag-optional-bg); color: var(--tag-optional-fg); }
+.tag-forecast { background: var(--tag-forecast-bg); color: var(--tag-forecast-fg); }
+.tag-warn { background: var(--tag-warn-bg); color: var(--tag-warn-fg); }
+.tag-do { background: var(--tag-do-bg); color: var(--tag-do-fg); }
+
+/* ===== Table ===== */
+.table-wrap {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-elevated);
+  margin-bottom: 16px;
+}
+.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.tbl th {
+  text-align: left;
+  padding: 12px 16px;
+  background: var(--bg-subtle);
+  font-weight: 600;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.tbl td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.55;
+}
+.tbl tr:last-child td { border-bottom: none; }
+.tbl tr.row-forecast { background: linear-gradient(to right, var(--tag-forecast-bg), transparent 60%); }
+.tbl td.cell-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  color: var(--text-subtle);
+  width: 50px;
+  text-align: center;
+}
+.tbl td.cell-strong { font-weight: 600; }
+.tbl td.cell-muted { color: var(--text-subtle); font-size: 13px; }
+.tbl td.cell-mono { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--text-muted); }
+
+/* ===== Group cards (그룹 정의 등) ===== */
+.group-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.group-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  position: relative;
+}
+.group-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.group-card-name { font-weight: 700; font-size: 15px; }
+.group-card-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-subtle);
+}
+.group-card-desc { font-size: 13.5px; color: var(--text-muted); line-height: 1.55; }
+.group-card-trigger {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border);
+  font-size: 12px;
+  color: var(--text-subtle);
+}
+.group-card-trigger strong { color: var(--text-muted); font-weight: 600; }
+
+/* ===== Compare 2-col (잘못된/올바른 예) ===== */
+.compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
+.compare-card {
+  border-radius: var(--radius);
+  padding: 18px;
+  border: 1px solid var(--border);
+}
+.compare-card.bad {
+  background: var(--tag-warn-bg);
+  border-color: var(--tag-warn-fg);
+}
+.compare-card.good {
+  background: var(--tag-do-bg);
+  border-color: var(--tag-do-fg);
+}
+.compare-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+.compare-card.bad .compare-label { color: var(--tag-warn-fg); }
+.compare-card.good .compare-label { color: var(--tag-do-fg); }
+.compare-body { font-size: 13.5px; line-height: 1.6; color: var(--text); }
+
+/* ===== Step list (시작하기) ===== */
+.steps { display: flex; flex-direction: column; gap: 16px; }
+.step {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  gap: 20px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+}
+.step-num {
+  width: 36px;
+  height: 36px;
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 15px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.step-body { padding-top: 4px; }
+.step-title {
+  font-weight: 700;
+  font-size: 15.5px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.step-desc { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
+.step-desc a { color: var(--text); text-decoration: underline; text-underline-offset: 2px; }
+.step-note {
+  margin-top: 10px;
+  font-size: 12.5px;
+  color: var(--text-subtle);
+  padding: 6px 10px;
+  background: var(--bg-subtle);
+  border-radius: 6px;
+  display: inline-block;
+}
+
+/* ===== Process flow (3단계) ===== */
+.flow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 24px 0;
+}
+.flow-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  position: relative;
+}
+.flow-card.lead { border-top: 3px solid var(--tag-lead-fg); }
+.flow-card.deal { border-top: 3px solid var(--tag-deal-fg); }
+.flow-card.closed { border-top: 3px solid var(--tag-closed-fg); }
+.flow-card-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-subtle);
+  margin-bottom: 8px;
+}
+.flow-card-title { font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+.flow-card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.55; margin-bottom: 16px; }
+.flow-card-meta {
+  font-size: 11.5px;
+  color: var(--text-subtle);
+  padding-top: 12px;
+  border-top: 1px dashed var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.flow-card-meta strong { color: var(--text-muted); font-weight: 600; }
+
+/* ===== Bullet list ===== */
+.bullets { padding-left: 4px; list-style: none; }
+.bullets li {
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+.bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 5px;
+  height: 5px;
+  background: var(--text-subtle);
+  border-radius: 50%;
+}
+
+/* ===== Highlight box ===== */
+.highlight-box {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin: 16px 0;
+}
+.highlight-box-title {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.highlight-box ol, .highlight-box ul {
+  padding-left: 20px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+.highlight-box li { margin-bottom: 4px; }
+
+/* ===== Activity guide ===== */
+.activity-template {
+  background: var(--bg-subtle);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--text-muted);
+  margin-top: 12px;
+}
+.activity-template strong { color: var(--text); font-weight: 600; }
+
+/* ===== Mobile burger (sidebar toggle) ===== */
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 100;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+  .app { grid-template-columns: 1fr; }
+  .sidebar {
+    position: fixed;
+    left: -300px;
+    z-index: 50;
+    width: 280px;
+    transition: left 0.25s ease;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.08);
+  }
+  .sidebar.open { left: 0; }
+  .menu-toggle { display: flex; }
+  .main { padding: 72px 24px 80px; }
+  .hero-title { font-size: 32px; }
+  .group-grid { grid-template-columns: 1fr; }
+  .compare { grid-template-columns: 1fr; }
+  .flow { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .main { padding: 64px 18px 64px; }
+  .hero-title { font-size: 26px; }
+  .hero-desc { font-size: 15px; }
+  .section-title { font-size: 22px; }
+  .section-header { flex-direction: column; gap: 8px; align-items: flex-start; }
+  .tbl th, .tbl td { padding: 10px 12px; font-size: 13px; }
+  .step { grid-template-columns: 1fr; gap: 12px; }
+}
+
+/* Sidebar overlay (mobile) */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 40;
+}
+.sidebar-overlay.show { display: block; }
+</style>
+</head>
+<body>
+
+<button class="menu-toggle" id="menuToggle" aria-label="목차 열기">☰</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="app">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-icon">M</div>
+      <div class="brand-text">
+        <div class="brand-title">monday.com 가이드</div>
+        <div class="brand-subtitle">영업활동 플레이북</div>
+      </div>
+    </div>
+
+    <div class="nav-label">목차</div>
+    <nav class="nav" id="nav">
+      <a class="nav-item active" href="file:///C:/Users/Choi%20Boyoung/Downloads/sales_playbook_3.html#groundrule"><span class="nav-num">01</span>그라운드룰</a>
+      <a class="nav-item" href="file:///C:/Users/Choi%20Boyoung/Downloads/sales_playbook_3.html#getting-started"><span class="nav-num">02</span>시작하기</a>
+      <a class="nav-item" href="file:///C:/Users/Choi%20Boyoung/Downloads/sales_playbook_3.html#process"><span class="nav-num">03</span>프로세스 흐름</a>
+      <a class="nav-item" href="file:///C:/Users/Choi%20Boyoung/Downloads/sales_playbook_3.html#lead"><span class="nav-num">04</span>리드 보드</a>
+      <a class="nav-item" href="file:///C:/Users/Choi%20Boyoung/Downloads/sales_playbook_3.html#deal"><span class="nav-num">05</span>거래 보드</a>
+      <a class="nav-item" href="file:///C:/Users/Choi%20Boyoung/Downloads/sales_playbook_3.html#closed"><span class="nav-num">06</span>종료 보드</a>
+      <a class="nav-item" href="file:///C:/Users/Choi%20Boyoung/Downloads/sales_playbook_3.html#checklist"><span class="nav-num">07</span>체크리스트</a>
+      <a class="nav-item" href="file:///C:/Users/Choi%20Boyoung/Downloads/sales_playbook_3.html#caution"><span class="nav-num">08</span>주의사항</a>
+      <a class="nav-item" href="file:///C:/Users/Choi%20Boyoung/Downloads/sales_playbook_3.html#faq"><span class="nav-num">09</span>자주 하는 실수</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="theme-toggle" role="group" aria-label="테마 전환">
+        <button class="theme-btn active" data-theme="light">Light</button>
+        <button class="theme-btn" data-theme="dark">Dark</button>
+      </div>
+      <div class="version-tag">v1.0</div>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN ===== -->
+  <main class="main">
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-eyebrow">SALES PLAYBOOK</div>
+      <h1 class="hero-title">영업활동 monday.com 가이드</h1>
+      <p class="hero-desc">
+        리드 생성부터 영업활동 관리, 거래 진행, 계약 완료 및 종료 처리까지
+        영업 프로세스 전반의 실무 기준을 정리한 문서입니다.
+        각 단계별 업무 기준과 필수 입력 사항, 운영 원칙을 정리하였으니 실무 진행 시 참고 부탁드립니다.
+      </p>
+    </header>
+
+    <!-- ============ 01. 그라운드룰 ============ -->
+    <section class="section" id="groundrule">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2 class="section-title">영업활동 그라운드룰</h2>
+      </div>
+      <p class="section-desc">monday.com을 활용한 영업활동의 기본 운영 원칙입니다. 모든 영업 담당자는 아래 8가지 원칙을 숙지하고 따라주세요.</p>
+
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th style="width: 60px;">No.</th>
+              <th style="width: 220px;">원칙</th>
+              <th>설명</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="cell-num">1</td><td class="cell-strong">Single Source of Truth</td><td>모든 영업 정보는 monday.com CRM에 기록합니다. 개인 메모, 엑셀, 메신저 등에만 저장된 정보는 공식 영업 데이터로 인정되지 않습니다.</td></tr>
+            <tr><td class="cell-num">2</td><td class="cell-strong">거래 → 종료 단계 준수</td><td>모든 영업 기회는 반드시 거래 → 종료 순서로 흘러야 합니다. 단계를 건너뛰거나 임의로 보드를 옮기지 않습니다.</td></tr>
+            <tr><td class="cell-num">3</td><td class="cell-strong">실시간 상태 업데이트 (T+1)</td><td>영업활동(미팅, 제안, 견적, 협의 등)이 발생하면 당일 또는 익일 오전까지 거래 보드 상태값을 최신화합니다. 상태값 지연은 파이프라인 왜곡을 야기합니다.</td></tr>
+            <tr><td class="cell-num">4</td><td class="cell-strong">필수값 누락 금지</td><td>각 보드별 필수 입력값(담당자, 기업명, 금액, 종료사유 등)은 단계 전환 전 반드시 입력합니다. 누락 시 거래/종료 보드 전환이 제한될 수 있습니다.</td></tr>
+            <tr><td class="cell-num">5</td><td class="cell-strong">활동 이력은 업데이트 섹션에</td><td>영업활동 과정의 모든 커뮤니케이션은 해당 아이템의 업데이트(코멘트) 섹션에 기록합니다. 다음 담당자가 이력만 봐도 맥락 파악이 가능해야 합니다.</td></tr>
+            <tr><td class="cell-num">6</td><td class="cell-strong">수주/실패 즉시 종료 처리</td><td>결과가 확정된 건은 영업일 기준 24시간 이내 종료 보드로 이동합니다. 실패 건도 사유를 반드시 남겨 향후 재영업 자산으로 활용합니다.</td></tr>
+            <tr><td class="cell-num">7</td><td class="cell-strong">공유 보기 임의 변경 금지</td><td>기본 보기 고정, 필터 저장, 컬럼 순서 변경은 전체 사용자에게 반영되므로 절대 사용하지 않습니다. 개인용 설정만 자유롭게 조정합니다.</td></tr>
+            <tr><td class="cell-num">8</td><td class="cell-strong">담당자 변경 시 인수인계</td><td>담당자 변경 시 기존 담당자는 업데이트 섹션에 진행 현황·다음 액션·고객 특이사항을 정리한 인수인계 코멘트를 남깁니다.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ 02. 시작하기 ============ -->
+    <section class="section" id="getting-started">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2 class="section-title">시작하기</h2>
+      </div>
+      <p class="section-desc">CRM 활용 전 준비 단계입니다. 아래 5단계를 순서대로 진행해주세요.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">계정 생성 및 로그인</div>
+            <div class="step-desc">
+              CRM 경로: <a href="https://dramancompany-bunch.monday.com/" target="_blank" rel="noopener">https://dramancompany-bunch.monday.com</a><br>
+              사내 업무 시스템 목록 &gt; 먼데이닷컴(Monday.com)을 참고해 네이버웍스로 계정 생성 요청. 결재 완료 후 Okta를 통해 로그인 가능합니다.
+            </div>
+            <div class="step-note">Okta Verify 필수</div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">프로필 설정</div>
+            <div class="step-desc">
+              우측 상단 프로필 이미지 클릭 &gt; 내 프로필 진입 &gt; 이름 표기 확인.<br>
+              예) <code>'길동 홍'</code> → <code>'홍길동'</code>으로 수정
+            </div>
+            <div class="step-note">이름 오류 시 담당자 지정 오류 발생</div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">워크스페이스 초대 확인</div>
+            <div class="step-desc">
+              각 사업부별로 2개의 워크스페이스 초대 확인 필요
+              <ul class="bullets" style="margin-top:8px;">
+                <li>전사 공통 — <code>00. 전사 공통</code></li>
+                <li>채용사업본부(자소설) — <code>02. 채용사업본부 (자소설)</code></li>
+              </ul>
+            </div>
+            <div class="step-note">미초대 시 관리자 문의</div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-title">알림 설정</div>
+            <div class="step-desc">
+              우측 상단 종 모양 아이콘 &gt; 톱니바퀴 아이콘<br>
+              세부 항목별 monday / 이메일 / 슬랙 알림 설정 가능
+            </div>
+            <div class="step-note">본인 업무 스타일에 맞춰 설정</div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <div class="step-title">모바일 앱 다운로드</div>
+            <div class="step-desc">
+              App Store / Google Play 에서 'monday.com' 검색 후 설치. 모바일 앱 사용 가이드 별도 링크 참고.
+            </div>
+            <div class="step-note">외근/현장 활용</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout callout-warn" style="margin-top: 24px;">
+        <span class="callout-icon">🚨</span>
+        <div class="callout-body">
+          <strong>시작하기 단계 주의사항</strong>
+          <ul class="bullets" style="margin-top: 8px;">
+            <li>보기 타입의 <strong>'기본 보기로 고정하기'</strong> 기능은 모든 사람에게 반영되므로 운영상 적용 금지</li>
+            <li>필터 설정 후 <strong>'이 보기에 저장'</strong> 기능은 모든 사람에게 반영되므로 운영상 적용 금지</li>
+            <li><strong>컬럼 순서 변경</strong>은 모든 사람에게 반영되므로 운영상 적용 금지</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 03. 프로세스 흐름 ============ -->
+    <section class="section" id="process">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2 class="section-title">전체 영업 프로세스 흐름</h2>
+      </div>
+      <p class="section-desc">
+        리드(Lead) → 거래(Deal) → 종료(Closed) 의 3단계 보드 구조로 운영됩니다.
+        모든 영업 기회는 리드 보드에서 시작하며, 단계 전환은 정해진 기준에 따라서만 진행됩니다.
+      </p>
+
+      <div class="flow">
+        <div class="flow-card lead">
+          <div class="flow-card-num">STEP 01</div>
+          <div class="flow-card-title">리드 보드 <span class="tag tag-lead" style="margin-left:6px;">Lead</span></div>
+          <div class="flow-card-desc">신규 유입 및 초기 검토 단계. 영업 대상 기업/기회의 최초 등록과 검수, 우선순위 판단을 수행.</div>
+          <div class="flow-card-meta">
+            <span><strong>주 담당</strong> · 관리자 / 운영 담당</span>
+            <span><strong>전환</strong> · 담당자 배정 완료 → 거래 보드</span>
+          </div>
+        </div>
+        <div class="flow-card deal">
+          <div class="flow-card-num">STEP 02</div>
+          <div class="flow-card-title">거래 보드 <span class="tag tag-deal" style="margin-left:6px;">Deal</span></div>
+          <div class="flow-card-desc">실제 영업활동 및 매출화 진행 단계. 미팅·제안·견적·협의 등 모든 영업활동이 실행되는 핵심 보드.</div>
+          <div class="flow-card-meta">
+            <span><strong>주 담당</strong> · 영업 담당자</span>
+            <span><strong>전환</strong> · 수주/실패 확정 → 종료 보드</span>
+          </div>
+        </div>
+        <div class="flow-card closed">
+          <div class="flow-card-num">STEP 03</div>
+          <div class="flow-card-title">종료 보드 <span class="tag tag-closed" style="margin-left:6px;">Closed</span></div>
+          <div class="flow-card-desc">결과 확정 및 이력 관리 단계. 수주/실패 결과 기록, 실적 집계, 재영업 대상 발굴 자료로 활용.</div>
+          <div class="flow-card-meta">
+            <span><strong>주 담당</strong> · 영업 담당자 + 관리자</span>
+            <span><strong>전환</strong> · 종착지 (재영업 시 신규 리드)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 04. 리드 보드 ============ -->
+    <section class="section" id="lead">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <h2 class="section-title">리드 보드 <span class="tag tag-lead" style="margin-left:8px;">Lead Board</span></h2>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title"><span class="subsection-num">4-1</span>목적과 운영 원칙</h3>
+        <ul class="bullets">
+          <li>모든 영업 기회의 시작점. 신규/재영업/내부발굴/외부채널 인입 등 발생 경로와 무관하게 모든 대상은 우선 리드 보드에 생성됩니다.</li>
+          <li>담당 영업자가 직접 영업활동을 수행하는 공간이 아닌, 배정 전 대기 및 검토 단계의 성격을 가집니다.</li>
+          <li>리드 보드 등록 → 영업 시작. 담당자 배정 후 거래 보드로 이동된 시점부터 실제 영업활동이 시작됩니다.</li>
+        </ul>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title"><span class="subsection-num">4-2</span>주요 업무 (관리자/운영 담당)</h3>
+        <div class="table-wrap">
+          <table class="tbl">
+            <thead><tr><th style="width:60px;">No.</th><th style="width:200px;">업무</th><th>내용</th></tr></thead>
+            <tbody>
+              <tr><td class="cell-num">1</td><td class="cell-strong">신규 리드 생성 및 등록</td><td>유입 채널, 기업 정보, 컨택 포인트 등 기본 정보 등록</td></tr>
+              <tr><td class="cell-num">2</td><td class="cell-strong">중복 여부 확인</td><td>기존 리드/거래/종료 보드와 중복되는 기업이 있는지 검수</td></tr>
+              <tr><td class="cell-num">3</td><td class="cell-strong">기업 정보 검수</td><td>사업자 등록번호, Company ID 확인</td></tr>
+              <tr><td class="cell-num">4</td><td class="cell-strong">담당자 배정</td><td>사업부/지역/계정 기준으로 담당 영업자 지정</td></tr>
+              <tr><td class="cell-num">5</td><td class="cell-strong">거래 보드 전환 여부 결정</td><td>실제 영업활동이 필요한 건만 거래 보드로 전환</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title"><span class="subsection-num">4-3</span>리드 보드 내 그룹별 정의</h3>
+        <div class="group-grid">
+          <div class="group-card">
+            <div class="group-card-head"><div class="group-card-name">신규</div><div class="group-card-num">01</div></div>
+            <div class="group-card-desc">요청에 의한 단건/벌크 생성 리드</div>
+            <div class="group-card-trigger"><strong>진입 트리거</strong> · 영업/관리자 요청</div>
+          </div>
+          <div class="group-card">
+            <div class="group-card-head"><div class="group-card-name">확인중</div><div class="group-card-num">02</div></div>
+            <div class="group-card-desc">IB로 인입된 신규 리드 (담당자 배정 전)</div>
+            <div class="group-card-trigger"><strong>진입 트리거</strong> · 자동 인입</div>
+          </div>
+          <div class="group-card">
+            <div class="group-card-head"><div class="group-card-name">확인 완료</div><div class="group-card-num">03</div></div>
+            <div class="group-card-desc">신규 또는 확인 중에서 처리가 끝난 리드</div>
+            <div class="group-card-trigger"><strong>진입 트리거</strong> · 검수·담당자 배정 완료</div>
+          </div>
+          <div class="group-card">
+            <div class="group-card-head"><div class="group-card-name">재배정 필요</div><div class="group-card-num">04</div></div>
+            <div class="group-card-desc">일괄 수거 후 재배정 대기 리드</div>
+            <div class="group-card-trigger"><strong>진입 트리거</strong> · 담당자 변경/이탈/일괄 회수 처리</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title"><span class="subsection-num">4-4</span>리드 보드 필수 입력값</h3>
+        <div class="table-wrap">
+          <table class="tbl">
+            <thead><tr>
+              <th style="width:70px;">구분</th>
+              <th style="width:140px;">필드명</th>
+              <th>설명</th>
+              <th style="width:200px;">입력 예시</th>
+              <th style="width:120px;">입력 시점</th>
+            </tr></thead>
+            <tbody>
+              <tr><td><span class="tag tag-required">필수</span></td><td class="cell-strong">기업명</td><td>정식 법인명 또는 사업자 명칭</td><td class="cell-mono">(주)드라마앤컴퍼니</td><td class="cell-muted">리드 생성 시</td></tr>
+              <tr><td><span class="tag tag-required">필수</span></td><td class="cell-strong">유입 경로</td><td>채널 경로, 출처채널, 채널상세, 계약구분</td><td class="cell-mono">IB / IB_상담문의 / 매체소개서 받기</td><td class="cell-muted">리드 생성 시</td></tr>
+              <tr><td><span class="tag tag-required">필수</span></td><td class="cell-strong">컨택 포인트</td><td>주요 컨택 담당자 이름 / 연락처</td><td class="cell-mono">홍길동 인사팀장 / 010-1234-5678</td><td class="cell-muted">리드 생성 시</td></tr>
+              <tr><td><span class="tag tag-required">필수</span></td><td class="cell-strong">담당자</td><td>배정된 영업 담당자</td><td class="cell-mono">홍길동</td><td class="cell-muted">거래 전환 직전</td></tr>
+              <tr><td><span class="tag tag-required">필수</span></td><td class="cell-strong">사업자 번호</td><td>해당 사업자의 사업자등록 번호</td><td class="cell-mono">123-86-78956</td><td class="cell-muted">리드 생성 시</td></tr>
+              <tr><td><span class="tag tag-required">필수</span></td><td class="cell-strong">Company ID</td><td>해당 기업의 리멤버 Company ID</td><td class="cell-mono">63474</td><td class="cell-muted">리드 생성 시</td></tr>
+              <tr><td><span class="tag tag-optional">선택</span></td><td class="cell-strong">메모</td><td>특이사항, 관리자 전달 메모</td><td class="cell-mono">기존 경쟁사 솔루션 사용 중</td><td class="cell-muted">수시</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 05. 거래 보드 ============ -->
+    <section class="section" id="deal">
+      <div class="section-header">
+        <span class="section-num">05</span>
+        <h2 class="section-title">거래 보드 <span class="tag tag-deal" style="margin-left:8px;">Deal Board</span></h2>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title"><span class="subsection-num">5-1</span>목적과 운영 원칙</h3>
+        <ul class="bullets">
+          <li>실제 영업활동이 이루어지는 핵심 보드. 현재 매출 가능성이 살아있는 모든 파이프라인이 모이는 공간입니다.</li>
+          <li>포함되는 리드: ① 새롭게 배정되어 영업을 시작해야 하는 신규 리드 ② 제안·견적·협의 등 영업활동이 진행 중인 기존 리드.</li>
+          <li>거래 보드 데이터는 개인 성과·팀 파이프라인·예상 매출 Forecast·전환율 분석의 기준이 되므로 정확한 상태 업데이트와 누락 없는 데이터 입력이 필수입니다.</li>
+        </ul>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title"><span class="subsection-num">5-2</span>거래 보드 내 주요 영업활동</h3>
+        <div class="table-wrap">
+          <table class="tbl">
+            <thead><tr><th style="width:60px;">No.</th><th style="width:240px;">활동 항목</th><th>활동 내용 / 정의</th></tr></thead>
+            <tbody>
+              <tr><td class="cell-num">1</td><td class="cell-strong">최초 컨택</td><td>니즈 파악</td></tr>
+              <tr><td class="cell-num">2</td><td class="cell-strong">서비스 소개 및 제안</td><td>견적 발송</td></tr>
+              <tr><td class="cell-num">3</td><td class="cell-strong">계약 협의</td><td>일정 관리</td></tr>
+              <tr><td class="cell-num">4</td><td class="cell-strong">후속 커뮤니케이션</td><td>활동 이력 업데이트</td></tr>
+              <tr><td class="cell-num">5</td><td class="cell-strong">예상 매출 및 수주 가능성 관리</td><td>상태값 최신화</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title"><span class="subsection-num">5-3</span>거래 보드 내 그룹별 정의</h3>
+        <div class="group-grid">
+          <div class="group-card">
+            <div class="group-card-head"><div class="group-card-name">신규 리드</div><div class="group-card-num">01</div></div>
+            <div class="group-card-desc">거래 보드로 막 전환되어 영업활동을 시작해야 하는 단계</div>
+            <div class="group-card-trigger"><strong>진입 트리거</strong> · 리드 보드 → 담당자 배정 후 거래 전환</div>
+          </div>
+          <div class="group-card">
+            <div class="group-card-head"><div class="group-card-name">컨택 중</div><div class="group-card-num">02</div></div>
+            <div class="group-card-desc">최초 컨택은 시도했으나 아직 유의미한 연결이 이뤄지지 않은 상태</div>
+            <div class="group-card-trigger"><strong>진입 트리거</strong> · 첫 컨택(메일/전화) 발송</div>
+          </div>
+          <div class="group-card">
+            <div class="group-card-head"><div class="group-card-name">pipeline</div><div class="group-card-num">03</div></div>
+            <div class="group-card-desc">본격적인 영업활동이 시작된 거래 (제안·견적·협의 등) 실질적 진행 중</div>
+            <div class="group-card-trigger"><strong>진입 트리거</strong> · 고객의 유의미한 응답 (소개서 요청 등)</div>
+          </div>
+          <div class="group-card">
+            <div class="group-card-head"><div class="group-card-name">보류</div><div class="group-card-num">04</div></div>
+            <div class="group-card-desc">의사는 있었으나 당장 계약 불가 → 추후 재탭핑이 필요한 상태</div>
+            <div class="group-card-trigger"><strong>진입 트리거</strong> · 고객 사정(예산/시점/조직 변경 등)으로 진행 중단</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title"><span class="subsection-num">5-4</span>거래 보드 상태값(Status) 정의</h3>
+        <div class="table-wrap">
+          <table class="tbl">
+            <thead><tr>
+              <th style="width:60px;">순서</th>
+              <th style="width:140px;">상태값</th>
+              <th style="width:110px;">그룹</th>
+              <th>정의</th>
+            </tr></thead>
+            <tbody>
+              <tr><td class="cell-num">1</td><td class="cell-strong">통화예약</td><td><span class="tag tag-deal">신규 리드</span></td><td>기업과 통화 연결이 되었고 재통화 예약으로 콜백이 필요한 경우</td></tr>
+              <tr><td class="cell-num">2</td><td class="cell-strong">재시도</td><td><span class="tag tag-deal">신규 리드</span></td><td>기업과 통화가 연결되지 않아 다시 시도해야 하는 경우 <span class="cell-muted">ex) 부재로 연결안됨</span></td></tr>
+              <tr><td class="cell-num">3</td><td class="cell-strong">콜드액션</td><td><span class="tag tag-deal">pipeline</span></td><td>기업 컨택포인트와 연결되어 영업활동의 기회 확보가 되었다고 판단되는 경우</td></tr>
+              <tr><td class="cell-num">4</td><td class="cell-strong">웜리드</td><td><span class="tag tag-deal">pipeline</span></td><td>콜드콜 이후 온도가 있는 의미 있는 추가 영업 가능 기업</td></tr>
+              <tr class="row-forecast"><td class="cell-num">5</td><td class="cell-strong">🔥 제안발송</td><td><span class="tag tag-forecast">pipeline</span></td><td>콜드메일/콜드콜 이후 상품의 인지활동으로 진입유도까지 진행된 경우 <span class="cell-muted">ex) 상품소개서 보내주세요 등</span></td></tr>
+              <tr class="row-forecast"><td class="cell-num">6</td><td class="cell-strong">🔥 견적발송</td><td><span class="tag tag-forecast">pipeline</span></td><td>영업자 ↔ 담당자 양방향으로 1차 또는 초기 제안활동이 진행된 경우</td></tr>
+              <tr class="row-forecast"><td class="cell-num">7</td><td class="cell-strong">🔥 구매예정</td><td><span class="tag tag-forecast">pipeline</span></td><td>최종 의사결정 일정이 Fix 되거나, 최종 협의만 남겨둔 상태 <span class="cell-muted">ex) 구매 대기중</span></td></tr>
+              <tr><td class="cell-num">8</td><td class="cell-strong">보류</td><td><span class="tag tag-deal">보류</span></td><td>현재 도입 계획은 없으나 관계관리 및 향후 추가적인 영업 단계를 진척시킬 가능성이 있는 경우</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-info">
+          <span class="callout-icon">🔥</span>
+          <div class="callout-body"><strong>포캐스팅 영역:</strong> [제안발송 / 견적발송 / 구매예정] 상태는 매출 예측의 핵심이 되는 단계입니다. 필수 입력값 누락에 특히 유의해주세요.</div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title"><span class="subsection-num">5-5</span>거래 보드 필수 입력값</h3>
+        <div class="table-wrap">
+          <table class="tbl">
+            <thead><tr>
+              <th style="width:200px;">상태값</th>
+              <th style="width:80px;">구분</th>
+              <th>입력 값</th>
+              <th style="width:280px;">입력 예시</th>
+            </tr></thead>
+            <tbody>
+              <tr><td rowspan="2" class="cell-strong">[통화예약] / [재시도]</td><td><span class="tag tag-required">필수</span></td><td>활동 내용 기록</td><td class="cell-mono">○○○ 담당자 부재, 오후 ○○시 재시도 예정</td></tr>
+              <tr><td><span class="tag tag-optional">선택</span></td><td>다음 활동일</td><td class="cell-mono">4월 2, 2026</td></tr>
+
+              <tr><td rowspan="2" class="cell-strong">[콜드액션] / [웜리드]</td><td><span class="tag tag-required">필수</span></td><td>활동 내용 기록</td><td class="cell-mono">○○○ 담당자 부재, 오후 ○○시 재시도 예정</td></tr>
+              <tr><td><span class="tag tag-optional">선택</span></td><td>다음 활동일</td><td class="cell-mono">4월 2, 2026</td></tr>
+
+              <tr class="row-forecast"><td rowspan="2" class="cell-strong">🔥 [제안발송]</td><td><span class="tag tag-required">필수</span></td><td>활동 내용 기록</td><td class="cell-mono">광고 1주 진행 당장 내일부터 하고 싶다 제안 견적 메일 송부</td></tr>
+              <tr class="row-forecast"><td><span class="tag tag-optional">선택</span></td><td>다음 활동일</td><td class="cell-mono">4월 2, 2026</td></tr>
+
+              <tr class="row-forecast"><td rowspan="2" class="cell-strong">🔥 [견적발송]</td><td><span class="tag tag-required">필수</span></td><td>견적금액, 계약 상품명, 예상 수주일</td><td class="cell-mono">3,000,000 / 광고 / 4월 30, 2026</td></tr>
+              <tr class="row-forecast"><td><span class="tag tag-optional">선택</span></td><td>계약 시작일, 계약 종료일, 계약금액(부가제외)</td><td class="cell-mono">4월 30, 2026 / 5월 7, 2026 / 3,000,000</td></tr>
+
+              <tr class="row-forecast"><td rowspan="2" class="cell-strong">🔥 [구매예정]</td><td><span class="tag tag-required">필수</span></td><td>견적금액, 계약 상품명, 예상 수주일, 계약 시작일, 계약 종료일, 계약금액</td><td class="cell-mono">4월 30, 2026 / 5월 7, 2026 / 3,000,000</td></tr>
+              <tr class="row-forecast"><td><span class="tag tag-optional">선택</span></td><td>계산서 발행 일자</td><td class="cell-mono">5월 7, 2026</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title"><span class="subsection-num">5-6</span>활동 이력(업데이트) 기록 가이드</h3>
+        <p style="color: var(--text-muted); font-size: 14px; line-height: 1.7;">
+          모든 영업활동은 거래 아이템의 <strong>'활동 추가'</strong>를 통해 기록합니다. 다음 항목이 자연스럽게 드러나면 좋습니다.
+        </p>
+        <div class="activity-template">
+          <strong>→ 참석자 / 주요내용 / 고객반응 / Next step</strong><br><br>
+          1. 누구와 소통했는지 (참석자)<br>
+          2. 무엇을 논의 했는지 (주요내용)<br>
+          3. 어떻게 진행됐는지 (고객반응)<br>
+          4. 어떤 다음 액션이 필요한지 (Next step)<br><br>
+          <em style="color: var(--text-subtle);">예) 04/24 김팀장과 광고 집행 도입 검토단계 확인, 가격 민감도 높음 → 다음주 견적 발송 예정</em>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 06. 종료 보드 ============ -->
+    <section class="section" id="closed">
+      <div class="section-header">
+        <span class="section-num">06</span>
+        <h2 class="section-title">종료 보드 <span class="tag tag-closed" style="margin-left:8px;">Closed Board</span></h2>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title"><span class="subsection-num">6-1</span>목적과 운영 원칙</h3>
+        <ul class="bullets">
+          <li>딜이 최종적으로 마무리된 건을 관리하는 보드. <strong>'수주(계약 완료)'</strong> 또는 <strong>'실패(보류·경쟁사 선정·예산 미확보·미진행 등)'</strong> 두 가지 결과로 확정 시 이동.</li>
+          <li>단순 보관이 아닌 결과 기록·분석·재활용을 위한 보드. 월별/담당자별 실적 집계, 수주율·실패사유 분석, 재영업 대상 발굴, 계약 이력 관리, 고객 히스토리 추적이 가능.</li>
+          <li>수주 건은 매출 집계와 직접 연결되므로 계약금액·상품명·시작일·종료일 등 필수값을 정확히 입력해야 합니다.</li>
+          <li>실패 건은 단순 종료 처리하지 말고 사유를 반드시 남겨 향후 재접촉 전략 수립 자산으로 활용합니다.</li>
+        </ul>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title"><span class="subsection-num">6-2</span>종료 결과 분류</h3>
+        <div class="group-grid">
+          <div class="group-card" style="border-left: 3px solid var(--tag-do-fg);">
+            <div class="group-card-head"><div class="group-card-name">수주 (Won)</div><div class="group-card-num">01</div></div>
+            <div class="group-card-desc">계약 체결 완료. 매출 발생 또는 발생 예정 상태. <strong>BP 생성 및 캠페인 or 플랜 연결 필수.</strong></div>
+          </div>
+          <div class="group-card" style="border-left: 3px solid var(--tag-warn-fg);">
+            <div class="group-card-head"><div class="group-card-name">실패</div><div class="group-card-num">02</div></div>
+            <div class="group-card-desc">특정 사유로 자소설 상품 이용 불가</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3 class="subsection-title"><span class="subsection-num">6-3</span>종료 보드 필수 입력값</h3>
+        <div class="table-wrap">
+          <table class="tbl">
+            <thead><tr>
+              <th style="width:70px;">결과</th>
+              <th style="width:160px;">필드명</th>
+              <th>설명</th>
+              <th style="width:200px;">입력 예시</th>
+              <th style="width:90px;">필수</th>
+            </tr></thead>
+            <tbody>
+              <tr><td><span class="tag tag-do">수주</span></td><td class="cell-strong">계약상품명</td><td>실제 체결된 상품/서비스의 정식 명칭</td><td class="cell-mono">광고, 공고플랜, 자소설페이</td><td><span class="tag tag-required">필수</span></td></tr>
+              <tr><td><span class="tag tag-do">수주</span></td><td class="cell-strong">계약금액</td><td>최종 체결된 계약 총액 (VAT 별도 기준)</td><td class="cell-mono">6,000,000</td><td><span class="tag tag-required">필수</span></td></tr>
+              <tr><td><span class="tag tag-do">수주</span></td><td class="cell-strong">계약 시작일</td><td>서비스 제공 또는 사용이 시작되는 날짜</td><td class="cell-mono">6월 20, 2026</td><td><span class="tag tag-required">필수</span></td></tr>
+              <tr><td><span class="tag tag-do">수주</span></td><td class="cell-strong">계약 종료일</td><td>서비스 제공 또는 사용이 종료되는 날짜</td><td class="cell-mono">6월 20, 2026</td><td><span class="tag tag-required">필수</span></td></tr>
+              <tr><td><span class="tag tag-do">수주</span></td><td class="cell-strong">계산서 발행 이메일</td><td>세금계산서를 수령할 고객사 담당자 이메일 주소</td><td class="cell-mono">test@remember.co.kr</td><td><span class="tag tag-required">필수</span></td></tr>
+              <tr><td><span class="tag tag-do">수주</span></td><td class="cell-strong">계산서 발행 날짜</td><td>세금계산서 발행 일자</td><td class="cell-mono">6월 20, 2026</td><td><span class="tag tag-required">필수</span></td></tr>
+              <tr><td><span class="tag tag-do">수주</span></td><td class="cell-strong">구매주체</td><td>실제 계약을 진행한 구매 주체</td><td class="cell-mono">대행사, 원청사</td><td><span class="tag tag-required">필수</span></td></tr>
+              <tr><td><span class="tag tag-do">수주</span></td><td class="cell-strong">상품 구분</td><td>상품의 카테고리 분류</td><td class="cell-mono">채용, 교육, 채용·교육</td><td><span class="tag tag-required">필수</span></td></tr>
+              <tr><td><span class="tag tag-do">수주</span></td><td class="cell-strong">캠페인 ID</td><td>해당 계약과 연결된 식별코드 <span class="cell-muted">(공고는 플랜 ID)</span></td><td class="cell-mono">4567</td><td><span class="tag tag-required">필수</span></td></tr>
+              <tr><td><span class="tag tag-do">수주</span></td><td class="cell-strong">채용 시작일</td><td>금번 채용의 시작일자</td><td class="cell-mono">6월 20, 2026</td><td><span class="tag tag-optional">선택</span></td></tr>
+              <tr><td><span class="tag tag-do">수주</span></td><td class="cell-strong">채용 유형</td><td>채용의 유형</td><td class="cell-mono">수시/상시, 공채, 교육 등</td><td><span class="tag tag-optional">선택</span></td></tr>
+              <tr><td><span class="tag tag-do">수주</span></td><td class="cell-strong">채용 시기</td><td>다음 채용의 시기</td><td class="cell-mono">6월 20, 2026</td><td><span class="tag tag-optional">선택</span></td></tr>
+              <tr><td><span class="tag tag-warn">실패</span></td><td class="cell-strong">상세 사유</td><td>구체적인 실주 원인 (자유 서술)</td><td class="cell-mono">채용 비용 소진 어려움 → 자소설 향후 이용계획 없음</td><td><span class="tag tag-required">필수</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="highlight-box">
+          <div class="highlight-box-title">📌 캠페인 ID 입력 원칙</div>
+          <ul>
+            <li><strong>원칙 1.</strong> 캠페인 ID는 반드시 <strong>1개의 값만</strong> 존재해야 합니다. (2개 이상 입력 X)</li>
+            <li><strong>원칙 2.</strong> 자소설페이 <strong>충전금액</strong>의 경우 → 캠페인 ID는 <code>0</code>으로 기재</li>
+            <li><strong>원칙 3.</strong> 자소설페이 <strong>사용금액</strong>의 경우 → 실제 사용한 캠페인 또는 플랜 ID 기재</li>
+            <li><strong>원칙 4.</strong> 공고 진행 건의 경우 → '캠페인 ID' 필드에 <strong>플랜 ID</strong>를 작성</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 07. 체크리스트 ============ -->
+    <section class="section" id="checklist">
+      <div class="section-header">
+        <span class="section-num">07</span>
+        <h2 class="section-title">보드별 필수 입력값 체크리스트</h2>
+      </div>
+      <p class="section-desc">
+        거래 보드는 상태값이 올라갈수록 입력값이 누적되는 구조입니다.
+        구매예정 단계에서는 견적발송 단계의 모든 필수값까지 모두 채워져 있어야 합니다.
+      </p>
+
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr>
+            <th style="width:50px;">No.</th>
+            <th>리드 보드</th>
+            <th>거래 보드 (공통)</th>
+            <th>거래 보드 (구매예정 추가)</th>
+            <th>종료 보드 (수주)</th>
+          </tr></thead>
+          <tbody>
+            <tr><td class="cell-num">1</td><td>기업명</td><td>활동 내용 기록 <span class="cell-muted">(모든 상태)</span></td><td>계약 시작일</td><td>계약상품명</td></tr>
+            <tr><td class="cell-num">2</td><td>유입 경로</td><td>견적금액 <span class="cell-muted">(견적발송 이후)</span></td><td>계약 종료일</td><td>계약금액</td></tr>
+            <tr><td class="cell-num">3</td><td>컨택 포인트</td><td>계약 상품명 <span class="cell-muted">(견적발송 이후)</span></td><td>계산서 발행 이메일</td><td>구매주체</td></tr>
+            <tr><td class="cell-num">4</td><td>사업자 번호</td><td>예상 수주일 <span class="cell-muted">(견적발송 이후)</span></td><td>계산서 발행 날짜</td><td>상품 구분</td></tr>
+            <tr><td class="cell-num">5</td><td>Company ID</td><td>다음 활동일 <span class="cell-muted">(선택)</span></td><td>캠페인 ID</td><td>상세 사유 <span class="cell-muted">(실패)</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============ 08. 주의사항 ============ -->
+    <section class="section" id="caution">
+      <div class="section-header">
+        <span class="section-num">08</span>
+        <h2 class="section-title">🚨 주의사항 (운영 원칙)</h2>
+      </div>
+
+      <div class="callout callout-warn">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">
+          <strong>개인 실적 = monday 기준</strong><br>
+          개인의 실적은 monday.com을 기준으로 집계됩니다.
+          <strong>2026년 4월부터는 대행사를 제외한 모든 집행 내역이 monday.com에 등록되어 있어야 합니다.</strong>
+          누락 등으로 인해 실적 집계 시 불이익을 받는 일이 없도록 반드시 등록해주세요.
+        </div>
+      </div>
+
+      <div class="callout callout-info" style="margin-top: 12px;">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">
+          monday.com에 없는 영업/집행 건은 공식 실적으로 인정되지 않습니다.
+          본인 실적 보호를 위해서라도 그라운드룰 1번(Single Source of Truth)을 꼭 지켜주세요.
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 09. 자주 하는 실수 ============ -->
+    <section class="section" id="faq">
+      <div class="section-header">
+        <span class="section-num">09</span>
+        <h2 class="section-title">❗ 자주 하는 실수 (Common Mistakes)</h2>
+      </div>
+      <p class="section-desc">실무에서 반복적으로 발생하는 입력 실수들입니다. 등록 전 한 번 더 체크해주세요.</p>
+
+      <!-- 실수 1: 다중 상품 -->
+      <div class="card" style="margin-top: 16px;">
+        <div class="card-title">Q. 1개의 기업이 동시에 여러 상품을 구매하는 경우 어떻게 등록하나요? <span style="color:var(--text-subtle); font-weight:500;">ex) 광고 + 공고 구매</span></div>
+        <div class="card-desc" style="margin-top: 8px;">→ 각 캠페인 ID 및 플랜 ID 별로 <strong>하나씩 거래 완료</strong>가 되어 있어야 합니다. 합쳐서 등록하지 마세요.</div>
+
+        <div class="compare">
+          <div class="compare-card bad">
+            <div class="compare-label">❌ 잘못된 예</div>
+            <div class="compare-body">
+              <strong>캠페인 ID:</strong> 4567, 7896 (한 거래에 합쳐 입력)<br>
+              <strong>계약금액:</strong> 1,000,000 (합계로 입력)<br>
+              <strong>거래 건수:</strong> 1개 거래에 통합
+            </div>
+          </div>
+          <div class="compare-card good">
+            <div class="compare-label">✅ 올바른 예</div>
+            <div class="compare-body">
+              <strong>거래 ①:</strong> 4567 / 500,000<br>
+              <strong>거래 ②:</strong> 7896 / 500,000<br>
+              <strong>거래 건수:</strong> 2개 거래로 각각 등록
+            </div>
+          </div>
+        </div>
+
+        <div class="callout callout-warn" style="margin-top: 12px;">
+          <span class="callout-icon">⚠️</span>
+          <div class="callout-body">캠페인 ID 다중 입력 + 합계 금액 입력은 <strong>실적 집계 오류</strong>의 가장 큰 원인입니다.</div>
+        </div>
+      </div>
+
+      <!-- 실수 2: 자소설페이 -->
+      <div class="card">
+        <div class="card-title">Q. 자소설페이는 어떻게 등록하나요?</div>
+        <div class="card-desc" style="margin-top: 8px;">→ <strong>'충전 시점'</strong>과 <strong>'사용 시점'</strong>을 분리해서 각각 등록합니다.</div>
+
+        <div class="table-wrap" style="margin-top: 14px;">
+          <table class="tbl">
+            <thead><tr>
+              <th style="width:200px;">구분</th>
+              <th style="width:160px;">캠페인 ID</th>
+              <th style="width:120px;">페이 계약 여부</th>
+              <th>상품금액 입력</th>
+            </tr></thead>
+            <tbody>
+              <tr><td class="cell-strong">충전 <span class="cell-muted">(예: 1억 충전)</span></td><td class="cell-mono">0</td><td><span class="tag tag-do">O</span></td><td>충전 금액(1억)을 상품금액 필드에 입력</td></tr>
+              <tr><td class="cell-strong">사용 <span class="cell-muted">(예: 500만원 사용)</span></td><td class="cell-mono">실제 사용한 캠페인/플랜 ID</td><td><span class="tag tag-do">O</span></td><td>실 사용 금액(500만원) 입력</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-info" style="margin-top: 12px;">
+          <span class="callout-icon">💡</span>
+          <div class="callout-body">자소설페이는 충전과 사용이 별개로 집행되므로 반드시 분리해서 등록합니다. 두 케이스 모두 <strong>'페이 계약 여부 = O'</strong> 표시 필수.</div>
+        </div>
+      </div>
+
+      <!-- 실수 3: 공고 플랜 ID -->
+      <div class="card">
+        <div class="card-title">Q. 캠페인 ID 필드인데 공고 진행 건은 어떻게 적나요?</div>
+        <div class="card-desc" style="margin-top: 8px;">→ 필드명은 '캠페인 ID'로 되어 있지만, 공고 진행 건은 <strong>'플랜 ID'</strong>를 작성하시면 됩니다.</div>
+      </div>
+    </section>
+
+    <footer style="margin-top: 100px; padding-top: 32px; border-top: 1px solid var(--border); text-align: center; font-size: 12.5px; color: var(--text-subtle);">
+      본 문서는 영업 운영 정책에 따라 수시로 갱신될 수 있습니다.<br>
+      문의·요청은 담당자에게 부탁드립니다.
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  // ===== Theme toggle =====
+  const themeButtons = document.querySelectorAll('.theme-btn');
+  const root = document.documentElement;
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  applyTheme(savedTheme);
+
+  themeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const theme = btn.dataset.theme;
+      applyTheme(theme);
+      localStorage.setItem('theme', theme);
+    });
+  });
+
+  function applyTheme(theme) {
+    root.setAttribute('data-theme', theme);
+    themeButtons.forEach(b => b.classList.toggle('active', b.dataset.theme === theme));
+  }
+
+  // ===== Sidebar nav active state on scroll =====
+  const navItems = document.querySelectorAll('.nav-item');
+  const sections = Array.from(navItems).map(item => {
+    const id = item.getAttribute('href').slice(1);
+    return document.getElementById(id);
+  });
+
+  function updateActiveNav() {
+    const scrollPos = window.scrollY + 120;
+    let activeIndex = 0;
+    for (let i = 0; i < sections.length; i++) {
+      if (sections[i] && sections[i].offsetTop <= scrollPos) {
+        activeIndex = i;
+      }
+    }
+    navItems.forEach((item, i) => item.classList.toggle('active', i === activeIndex));
+  }
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+  updateActiveNav();
+
+  // ===== Smooth scroll on nav click + close mobile sidebar =====
+  navItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      const id = item.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if (target) {
+        window.scrollTo({ top: target.offsetTop - 16, behavior: 'smooth' });
+      }
+      closeSidebar();
+    });
+  });
+
+  // ===== Mobile sidebar toggle =====
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+  const menuToggle = document.getElementById('menuToggle');
+
+  menuToggle.addEventListener('click', () => {
+    sidebar.classList.add('open');
+    overlay.classList.add('show');
+  });
+  overlay.addEventListener('click', closeSidebar);
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('show');
+  }
+</script>
+
+
+
+</body></html>
