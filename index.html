@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0065)file:///C:/Users/Choi%20Boyoung/Downloads/lead_management_28.html -->
+<!-- saved from url=(0065)file:///C:/Users/Choi%20Boyoung/Downloads/lead_management_29.html -->
 <html lang="ko" class="scroll-smooth dark"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="google" content="notranslate">
@@ -1354,9 +1354,9 @@
         <div class="filter-label">집행분기상태</div>
         <select id="quarterFilter">
           <option value="all">전체</option>
+          <option value="컨택필요">컨택필요</option>
           <option value="진행중">진행중</option>
           <option value="집행완료">집행완료</option>
-          <option value="해당없음">해당없음</option>
           <option value="없음">이력없음</option>
         </select>
       </div>
@@ -2376,10 +2376,20 @@ function render() {
       : '<span class="badge">컨택 완료</span>';
 
     let qClass = 'text-secondary';
-    if (item.quarterStatus && (item.quarterStatus.includes('준비필요') || item.quarterStatus.includes('진행중'))) {
-      qClass = 'text-primary-color';
-    } else if (item.quarterStatus && item.quarterStatus.includes('해당없음')) {
+    let qDisplay = item.quarterStatus || '-';
+    if (item.quarterStatus) {
+      if (item.quarterStatus.includes('컨택필요')) {
+        // 컨택필요: 배지 하이라이트
+        qDisplay = `<span class="badge badge-primary">${item.quarterStatus}</span>`;
+        qClass = '';
+      } else if (item.quarterStatus.includes('진행중')) {
+        qClass = 'text-primary-color';
+      } else if (item.quarterStatus.includes('집행완료')) {
+        qClass = 'text-secondary';
+      }
+    } else {
       qClass = 'text-tertiary';
+      qDisplay = '-';
     }
 
     const needCreateBadge = item.needCreate === '생성필요'
@@ -2447,7 +2457,7 @@ function render() {
       <td class="text-secondary">${item.latestStartAt || '-'}</td>
       <td class="text-secondary">${item.lastActivity || '-'}</td>
       <td>${contactBadge}</td>
-      <td class="${qClass}">${item.quarterStatus || '-'}</td>
+      <td class="${qClass}">${qDisplay}</td>
       <td>${priorityControl}</td>
       <td>${changedCell}</td>
     `;
